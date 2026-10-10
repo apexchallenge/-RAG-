@@ -9,10 +9,12 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+from dotenv import load_dotenv
 
 import yaml
 
-from .paths import resolve
+from .paths import ROOT, resolve
+load_dotenv(ROOT / ".env")  # 读项目根目录的 .env；系统里已有的同名环境变量优先
 
 _PATH_KEYS = (("data_dir",), ("index_dir",), ("bm25", "user_dict"), ("bm25", "stopwords"))
 

@@ -9,4 +9,5 @@ pyyaml>=6.0
 numpy
 scipy
 tqdm
+python-dotenv>=1.0
 # 做 embedding 微调时再装：pip install "sentence-transformers[train]"（datasets + accelerate）
