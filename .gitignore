@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-__pycache__/
-*.pyc
-.env
-.venv/
+# ===== 本项目专用 =====
 # 下载的数据、索引、微调模型不进 git（demo 数据除外）；results/ 建议提交，作为可复现的实验记录
 data/*
 !data/demo/
@@ -10,7 +6,11 @@ indexes/
 output/
 *.index
 *.npy
-=======
+
+# PyCharm 的项目设置
+.idea/
+
+# ===== GitHub 官方 Python 模板（已包含 __pycache__/、*.pyc、.env、.venv 等） =====
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -231,4 +231,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
->>>>>>> 82e0c8ee252b5187a5b24c56e79f221c910e5f8b
