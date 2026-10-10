@@ -1,0 +1,12 @@
+# Python 3.10+。先按 https://pytorch.org/get-started/locally/ 装好和你 CUDA 匹配的 torch，再 pip install -r requirements.txt
+sentence-transformers>=5.0
+faiss-cpu>=1.8
+bm25s>=0.2
+jieba>=0.42.1
+datasets>=2.16
+openai>=1.0
+pyyaml>=6.0
+numpy
+scipy
+tqdm
+# 做 embedding 微调时再装：pip install "sentence-transformers[train]"（datasets + accelerate）

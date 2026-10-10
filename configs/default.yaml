@@ -1,0 +1,64 @@
+# 默认配置：中文医疗问答检索（mteb/CmedqaRetrieval，约 10 万篇文档、4 千条查询）
+# 先运行：python scripts/prepare_data.py --hf mteb/CmedqaRetrieval --out data/cmedqa
+# 命令行可以覆盖任何一项：--set reranker.top_n=20
+
+data_dir: data/cmedqa
+index_dir: indexes/cmedqa
+
+bm25:
+  jieba_mode: search        # search（搜索引擎模式，召回高）| accurate（精确模式）
+  user_dict: null           # 领域词典，例如 data/medical_dict.txt（每行：词 词频 词性）
+  stopwords: null           # 停用词表，每行一个词
+  k1: 1.2                   # 词频饱和参数
+  b: 0.75                   # 文档长度归一化参数
+
+embedder:
+  model: BAAI/bge-base-zh-v1.5            # 对比可选：BAAI/bge-large-zh-v1.5、BAAI/bge-m3、微调后的本地路径
+  query_instruction: "为这个句子生成表示以用于检索相关文章："   # BGE-zh-v1.5 的查询指令；bge-m3 设为 ""
+  query_prompt_name: null                 # Qwen3-Embedding 这类自带提示词的模型填 query
+  max_seq_length: 512
+  batch_size: 128
+  fp16: true                              # 仅在 GPU 上生效
+  device: null                            # null = 自动（cuda > mps > cpu）
+
+faiss:
+  index_type: flat          # flat | hnsw | ivf | ivfpq
+  hnsw_m: 32
+  hnsw_ef_construction: 200
+  hnsw_ef_search: 128
+  ivf_nlist: 1024
+  ivf_nprobe: 32
+  pq_m: 64                  # 必须整除向量维度（768 维可用 32/48/64/96）
+  pq_nbits: 8
+
+retrieval:
+  bm25_top_k: 100           # 每一路召回多少条
+  dense_top_k: 100
+  fusion: rrf               # rrf | weighted
+  rrf_k: 60
+  rrf_use_weights: false    # true 时 RRF 也乘以下面的权重
+  weights: {bm25: 0.3, dense: 0.7}   # 加权融合的权重：只在 dev 上调
+  fused_top_k: 100
+
+reranker:
+  enabled: true
+  model: BAAI/bge-reranker-v2-m3          # 更快的选择：BAAI/bge-reranker-base
+  top_n: 50                 # 只重排融合结果的前 top_n 条（效果和延迟的主要旋钮）
+  max_length: 512
+  batch_size: 64
+  fp16: true
+  device: null
+
+generation:
+  base_url: https://api.deepseek.com      # 任意 OpenAI 兼容接口；本地 Ollama: http://localhost:11434/v1
+  model: deepseek-flash                   # 以服务商文档为准；Ollama 例如 qwen3:8b
+  api_key_env: LLM_API_KEY                # 从这个环境变量读 key，不要把 key 写进代码或配置
+  context_top_k: 5
+  max_chars_per_doc: 600
+  temperature: 0.2
+
+eval:
+  split: test               # 最终报告只看 test；调参用 --split dev
+  max_queries: null         # 调试时可以先用 200
+  recall_ks: [5, 10, 20, 100]
+  seed: 42

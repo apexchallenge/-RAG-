@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+# 下载的数据、索引、微调模型不进 git（demo 数据除外）；results/ 建议提交，作为可复现的实验记录
+data/*
+!data/demo/
+indexes/
+output/
+*.index
+*.npy
