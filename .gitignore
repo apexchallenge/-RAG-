@@ -6,6 +6,8 @@ indexes/
 output/
 *.index
 *.npy
+# 逐条排序结果每个约 10MB，不进 git（需要时重跑 evaluate.py 即可生成）
+results/*_runs.tsv.gz
 
 # PyCharm 的项目设置
 .idea/

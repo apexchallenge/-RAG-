@@ -12,12 +12,13 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from rag.evaluation import MODES, analyze_failures, format_table, measure_latency, run_eval, save_results  # noqa: E402
+from rag.evaluation import FAILURE_CATEGORIES, MODES, analyze_failures, format_table, measure_latency, run_eval, save_results  # noqa: E402
 from rag.generator import Generator, build_messages  # noqa: E402
 from rag.indexing import build_bm25, build_dense  # noqa: E402
 from rag.pipeline import RAGPipeline, rerank_head  # noqa: E402
 from rag.data import load_split_ids, write_jsonl, write_qrels  # noqa: E402
 from rag.prep import make_splits_for, prepare_docs  # noqa: E402
+from rag.runs import read_runs  # noqa: E402
 from tests.fakes import ROOT, demo_config, fake_embedder, fake_reranker  # noqa: E402
 
 
@@ -55,11 +56,13 @@ class TestEndToEnd(unittest.TestCase):
 
     def test_failure_analysis(self):
         summary, rows = analyze_failures(self.res, self.cfg, k=1)
-        cats = sum(summary.get(c, 0) for c in ("召回失败", "截断失败", "排序失败"))
+        cats = sum(summary.get(c, 0) for c in FAILURE_CATEGORIES)
         self.assertEqual(cats, summary["failed"])
-        self.assertEqual(len(rows), summary["failed"])
+        self.assertEqual(len(rows), summary["failed"])  # 默认保存全部失败案例
         for row in rows:
-            self.assertIn(row["category"], ("召回失败", "截断失败", "排序失败"))
+            self.assertIn(row["category"], FAILURE_CATEGORIES)
+            self.assertTrue(all("rank" in g and "text" in g for g in row["gold"]))
+        self.assertEqual(len(analyze_failures(self.res, self.cfg, k=1, limit=1)[1]), min(1, summary["failed"]))
 
     def test_latency_and_save(self):
         latency = measure_latency(self.cfg, self.res, n=5, warmup=1)
@@ -72,6 +75,10 @@ class TestEndToEnd(unittest.TestCase):
         self.assertTrue(md.with_suffix(".json").exists())
         data = json.loads(md.with_suffix(".json").read_text(encoding="utf-8"))
         self.assertEqual(data["n_queries"], 18)
+        self.assertEqual(data["config"]["eval"]["split"], self.res.split)
+        runs = read_runs(md.parent / data["runs_file"])
+        self.assertEqual(set(runs), set(self.res.table))
+        self.assertEqual(len(runs["dense"]), 18)
 
     def test_pipeline_ask(self):
         pipe = RAGPipeline(self.cfg, embedder=self.embedder, reranker=self.reranker, generator=Generator({}))

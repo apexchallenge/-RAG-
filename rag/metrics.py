@@ -4,6 +4,7 @@
     MRR@k      第一个相关文档排在第几（取倒数），没进前 k 记 0  —— 用户只看第一条时看它
     nDCG@k     考虑相关文档的位置和相关等级，越靠前越好        —— 精排阶段看它
     Hit@k      前 k 个里是否至少有一个相关文档
+    P@k        前 k 个里相关文档的比例（补标之后才有意义：原始 qrels 每题只有 1~2 个正例）
 """
 
 from __future__ import annotations
@@ -22,6 +23,10 @@ def hit_at_k(ranked: list[str], relevant: dict[str, int], k: int) -> float:
     return 1.0 if any(relevant.get(d, 0) > 0 for d in ranked[:k]) else 0.0
 
 
+def precision_at_k(ranked: list[str], relevant: dict[str, int], k: int) -> float:
+    return sum(1 for d in ranked[:k] if relevant.get(d, 0) > 0) / k
+
+
 def mrr_at_k(ranked: list[str], relevant: dict[str, int], k: int) -> float:
     for i, d in enumerate(ranked[:k], start=1):
         if relevant.get(d, 0) > 0:
@@ -36,7 +41,26 @@ def ndcg_at_k(ranked: list[str], relevant: dict[str, int], k: int) -> float:
     return dcg / idcg if idcg > 0 else 0.0
 
 
-METRICS = {"recall": recall_at_k, "hit": hit_at_k, "mrr": mrr_at_k, "ndcg": ndcg_at_k}
+METRICS = {"recall": recall_at_k, "hit": hit_at_k, "mrr": mrr_at_k, "ndcg": ndcg_at_k, "precision": precision_at_k}
+_NAMES = {"r": "recall", "recall": "recall", "hit": "hit", "mrr": "mrr", "ndcg": "ndcg", "p": "precision", "precision": "precision"}
+
+
+def parse_metric(name: str) -> tuple[str, int]:
+    """"nDCG@10" -> ("ndcg", 10)；"R@100" -> ("recall", 100)。"""
+    if "@" not in name:
+        raise ValueError(f"指标名应形如 nDCG@10 / R@10 / MRR@10 / Hit@10，收到 {name!r}")
+    head, k = name.split("@", 1)
+    key = _NAMES.get(head.strip().lower())
+    if key is None or not k.strip().isdigit():
+        raise ValueError(f"无法解析指标名 {name!r}")
+    return key, int(k)
+
+
+def per_query(run: dict[str, list[str]], qrels: dict[str, dict[str, int]], metric: str = "nDCG@10") -> dict[str, float]:
+    """每条查询各自的指标值（做显著性检验要用逐条结果，不能只看平均数）。"""
+    key, k = parse_metric(metric)
+    fn = METRICS[key]
+    return {q: fn(run[q], qrels[q], k) for q in run if any(s > 0 for s in qrels.get(q, {}).values())}
 
 
 def evaluate_run(

@@ -1,0 +1,227 @@
+{
+  "split": "dev",
+  "n_queries": 500,
+  "n_docs": 100001,
+  "table": {
+    "bm25": {
+      "R@5": 0.12982540967804126,
+      "R@10": 0.16343969539232697,
+      "R@20": 0.2312149701176017,
+      "R@100": 0.3483837767495662,
+      "MRR@10": 0.15223333333333333,
+      "nDCG@10": 0.13228880833195727,
+      "ms/q": 1.8660009999293834
+    },
+    "dense": {
+      "R@5": 0.4349381080907397,
+      "R@10": 0.5180196099222415,
+      "R@20": 0.6271045305571621,
+      "R@100": 0.804194312704839,
+      "MRR@10": 0.42497460317460317,
+      "nDCG@10": 0.41030871496052657,
+      "ms/q": 1.4037657999433577
+    },
+    "hybrid_rrf": {
+      "R@5": 0.32761985412248573,
+      "R@10": 0.421550684403316,
+      "R@20": 0.5319917100443416,
+      "R@100": 0.7506163260715892,
+      "MRR@10": 0.32099761904761903,
+      "nDCG@10": 0.30844384199812636,
+      "ms/q": 3.6854673998896033
+    },
+    "hybrid_weighted": {
+      "R@5": 0.43402144142407295,
+      "R@10": 0.5051386575412891,
+      "R@20": 0.6191083767110083,
+      "R@100": 0.7787290244842876,
+      "MRR@10": 0.4178825396825397,
+      "nDCG@10": 0.40103028957638753,
+      "ms/q": 3.3701719999080524
+    },
+    "dense_rerank": {
+      "R@5": 0.39904525094788257,
+      "R@10": 0.5091562399588715,
+      "R@20": 0.6223693657219973,
+      "R@100": 0.804194312704839,
+      "MRR@10": 0.40992063492063496,
+      "nDCG@10": 0.3930737276592115,
+      "ms/q": 173.5250723999925
+    },
+    "hybrid_rerank": {
+      "R@5": 0.3978008065034381,
+      "R@10": 0.5095848113874429,
+      "R@20": 0.6288730415783048,
+      "R@100": 0.7506163260715892,
+      "MRR@10": 0.40074365079365076,
+      "nDCG@10": 0.3874586614489995,
+      "ms/q": 251.2400927998824
+    }
+  },
+  "significance": {
+    "baseline": "dense",
+    "metric": "nDCG@10",
+    "tests": {
+      "bm25": {
+        "n": 500,
+        "delta": -0.2780199066285693,
+        "ci95": [
+          -0.31040976364844647,
+          -0.24634894879536032
+        ],
+        "p": 9.999000099990002e-05,
+        "wins": 14,
+        "losses": 271,
+        "ties": 215
+      },
+      "hybrid_rrf": {
+        "n": 500,
+        "delta": -0.10186487296240021,
+        "ci95": [
+          -0.12414191767964841,
+          -0.07979845368149721
+        ],
+        "p": 9.999000099990002e-05,
+        "wins": 58,
+        "losses": 203,
+        "ties": 239
+      },
+      "hybrid_weighted": {
+        "n": 500,
+        "delta": -0.009278425384139045,
+        "ci95": [
+          -0.01732178108718081,
+          -0.0009456726805597832
+        ],
+        "p": 0.0268973102689731,
+        "wins": 46,
+        "losses": 95,
+        "ties": 359
+      },
+      "dense_rerank": {
+        "n": 500,
+        "delta": -0.01723498730131506,
+        "ci95": [
+          -0.03529124391619454,
+          0.0012462320838608821
+        ],
+        "p": 0.06519348065193481,
+        "wins": 95,
+        "losses": 131,
+        "ties": 274
+      },
+      "hybrid_rerank": {
+        "n": 500,
+        "delta": -0.022850053511527104,
+        "ci95": [
+          -0.041313436620256556,
+          -0.004185224027188255
+        ],
+        "p": 0.015898410158984102,
+        "wins": 89,
+        "losses": 139,
+        "ties": 272
+      }
+    }
+  },
+  "fusion_loss": {
+    "hybrid_rrf": {
+      "window": 50,
+      "lost": 28,
+      "lost_rate": 0.056,
+      "rescued": 0,
+      "n": 500
+    },
+    "hybrid_weighted": {
+      "window": 50,
+      "lost": 8,
+      "lost_rate": 0.016,
+      "rescued": 0,
+      "n": 500
+    }
+  },
+  "failures": {
+    "mode": "hybrid_rerank",
+    "k": 10,
+    "failed": 190,
+    "total": 500,
+    "召回失败": 70,
+    "融合丢失": 28,
+    "截断失败": 20,
+    "重排挤出": 19,
+    "排序失败": 53
+  },
+  "latency_ms": null,
+  "runs_file": "cmedqa_20261012-145427_runs.tsv.gz",
+  "config": {
+    "data_dir": "D:\\PersonalProject\\rag-zh-starter\\data\\cmedqa",
+    "index_dir": "D:\\PersonalProject\\rag-zh-starter\\indexes\\cmedqa",
+    "bm25": {
+      "jieba_mode": "search",
+      "user_dict": null,
+      "stopwords": null,
+      "k1": 1.2,
+      "b": 0.75
+    },
+    "embedder": {
+      "model": "BAAI/bge-base-zh-v1.5",
+      "query_instruction": "为这个句子生成表示以用于检索相关文章：",
+      "query_prompt_name": null,
+      "max_seq_length": 512,
+      "batch_size": 128,
+      "fp16": true,
+      "device": null
+    },
+    "faiss": {
+      "index_type": "flat",
+      "hnsw_m": 32,
+      "hnsw_ef_construction": 200,
+      "hnsw_ef_search": 128,
+      "ivf_nlist": 1024,
+      "ivf_nprobe": 32,
+      "pq_m": 64,
+      "pq_nbits": 8
+    },
+    "retrieval": {
+      "bm25_top_k": 100,
+      "dense_top_k": 100,
+      "fusion": "rrf",
+      "rrf_k": 60,
+      "rrf_use_weights": false,
+      "weights": {
+        "bm25": 0.3,
+        "dense": 0.7
+      },
+      "fused_top_k": 100
+    },
+    "reranker": {
+      "enabled": true,
+      "model": "BAAI/bge-reranker-v2-m3",
+      "top_n": 50,
+      "max_length": 512,
+      "batch_size": 64,
+      "fp16": true,
+      "device": null
+    },
+    "generation": {
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-flash",
+      "api_key_env": "LLM_API_KEY",
+      "context_top_k": 5,
+      "max_chars_per_doc": 600,
+      "temperature": 0.2
+    },
+    "eval": {
+      "split": "dev",
+      "max_queries": null,
+      "recall_ks": [
+        5,
+        10,
+        20,
+        100
+      ],
+      "seed": 42,
+      "n_queries": 500
+    }
+  }
+}

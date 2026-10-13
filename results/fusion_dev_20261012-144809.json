@@ -1,0 +1,667 @@
+{
+  "split": "dev",
+  "n_queries": 500,
+  "metric": "nDCG@10",
+  "window": 50,
+  "rows": [
+    {
+      "name": "RRF k=10 bm25=0.1",
+      "metrics": {
+        "R@5": 0.4389381080907397,
+        "R@10": 0.5148362765889082,
+        "R@20": 0.6257711972238288,
+        "R@100": 0.804194312704839,
+        "MRR@10": 0.4277404761904762,
+        "nDCG@10": 0.41059340465480654
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 3,
+        "lost_rate": 0.006,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": 0.00028468969427996514,
+        "ci95": [
+          -0.0026651115810628345,
+          0.0029137782375504373
+        ],
+        "p": 0.8445777111444278,
+        "wins": 25,
+        "losses": 17,
+        "ties": 458
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=10",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.1, dense: 0.9}"
+      ]
+    },
+    {
+      "name": "dense only",
+      "metrics": {
+        "R@5": 0.4349381080907397,
+        "R@10": 0.5180196099222415,
+        "R@20": 0.6271045305571621,
+        "R@100": 0.804194312704839,
+        "MRR@10": 0.42497460317460317,
+        "nDCG@10": 0.41030871496052657
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 4,
+        "lost_rate": 0.008,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": null,
+      "set": []
+    },
+    {
+      "name": "加权 bm25=0.1",
+      "metrics": {
+        "R@5": 0.438971441424073,
+        "R@10": 0.5163362765889081,
+        "R@20": 0.627243419446051,
+        "R@100": 0.7924700019278966,
+        "MRR@10": 0.423252380952381,
+        "nDCG@10": 0.40889494636249046
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 4,
+        "lost_rate": 0.008,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.0014137685980360785,
+        "ci95": [
+          -0.005257466412423699,
+          0.0022536720483551215
+        ],
+        "p": 0.4827586206896552,
+        "wins": 31,
+        "losses": 36,
+        "ties": 433
+      },
+      "set": [
+        "retrieval.fusion=weighted",
+        "retrieval.weights={bm25: 0.1, dense: 0.9}"
+      ]
+    },
+    {
+      "name": "加权 bm25=0.2",
+      "metrics": {
+        "R@5": 0.43738810809073964,
+        "R@10": 0.5078719908746224,
+        "R@20": 0.6180639322665639,
+        "R@100": 0.7905814054366685,
+        "MRR@10": 0.42692142857142856,
+        "nDCG@10": 0.4083677478496417
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 6,
+        "lost_rate": 0.012,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.0019409671108848684,
+        "ci95": [
+          -0.007817594864084081,
+          0.004399458711004208
+        ],
+        "p": 0.5527236381809095,
+        "wins": 40,
+        "losses": 61,
+        "ties": 399
+      },
+      "set": [
+        "retrieval.fusion=weighted",
+        "retrieval.weights={bm25: 0.2, dense: 0.8}"
+      ]
+    },
+    {
+      "name": "RRF k=30 bm25=0.1",
+      "metrics": {
+        "R@5": 0.4344381080907397,
+        "R@10": 0.5129870702397018,
+        "R@20": 0.621354530557162,
+        "R@100": 0.804194312704839,
+        "MRR@10": 0.42266031746031746,
+        "nDCG@10": 0.40674619066598505
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 3,
+        "lost_rate": 0.006,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.0035625242945415215,
+        "ci95": [
+          -0.010412501577903984,
+          0.0032658792984376476
+        ],
+        "p": 0.30834582708645675,
+        "wins": 49,
+        "losses": 65,
+        "ties": 386
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=30",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.1, dense: 0.9}"
+      ]
+    },
+    {
+      "name": "RRF k=10 bm25=0.2",
+      "metrics": {
+        "R@5": 0.43602144142407295,
+        "R@10": 0.5128204035730352,
+        "R@20": 0.6145100861127176,
+        "R@100": 0.7949085984191246,
+        "MRR@10": 0.4199436507936508,
+        "nDCG@10": 0.4051057656717725
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 4,
+        "lost_rate": 0.008,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.0052029492887541015,
+        "ci95": [
+          -0.011155744621415328,
+          0.0007415089908919358
+        ],
+        "p": 0.0944527736131934,
+        "wins": 42,
+        "losses": 57,
+        "ties": 401
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=10",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.2, dense: 0.8}"
+      ]
+    },
+    {
+      "name": "加权 bm25=0.3",
+      "metrics": {
+        "R@5": 0.43402144142407295,
+        "R@10": 0.5051386575412891,
+        "R@20": 0.6191083767110083,
+        "R@100": 0.7787290244842876,
+        "MRR@10": 0.4178825396825397,
+        "nDCG@10": 0.40103028957638753
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 8,
+        "lost_rate": 0.016,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.009278425384139045,
+        "ci95": [
+          -0.017301377569232897,
+          -0.0012534571538812516
+        ],
+        "p": 0.026986506746626688,
+        "wins": 46,
+        "losses": 95,
+        "ties": 359
+      },
+      "set": [
+        "retrieval.fusion=weighted",
+        "retrieval.weights={bm25: 0.3, dense: 0.7}"
+      ]
+    },
+    {
+      "name": "RRF k=10 bm25=0.3",
+      "metrics": {
+        "R@5": 0.43168810809073965,
+        "R@10": 0.5115148480174796,
+        "R@20": 0.6126083767110083,
+        "R@100": 0.7822700019278968,
+        "MRR@10": 0.41599365079365075,
+        "nDCG@10": 0.400925545969684
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 9,
+        "lost_rate": 0.018,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.009383168990842558,
+        "ci95": [
+          -0.017952851624921447,
+          -0.0007485249739544901
+        ],
+        "p": 0.03698150924537731,
+        "wins": 49,
+        "losses": 92,
+        "ties": 359
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=10",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.3, dense: 0.7}"
+      ]
+    },
+    {
+      "name": "RRF k=60 bm25=0.1",
+      "metrics": {
+        "R@5": 0.431471441424073,
+        "R@10": 0.5110442130968447,
+        "R@20": 0.6127305989332306,
+        "R@100": 0.804194312704839,
+        "MRR@10": 0.41353253968253967,
+        "nDCG@10": 0.39755796769929697
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 3,
+        "lost_rate": 0.006,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.012750747261229626,
+        "ci95": [
+          -0.022790182168832763,
+          -0.002266581666386433
+        ],
+        "p": 0.018490754622688656,
+        "wins": 52,
+        "losses": 103,
+        "ties": 345
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=60",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.1, dense: 0.9}"
+      ]
+    },
+    {
+      "name": "RRF k=30 bm25=0.2",
+      "metrics": {
+        "R@5": 0.43055477475740633,
+        "R@10": 0.5075442130968446,
+        "R@20": 0.6177305989332306,
+        "R@100": 0.804194312704839,
+        "MRR@10": 0.41151190476190475,
+        "nDCG@10": 0.39550034471750417
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 3,
+        "lost_rate": 0.006,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.01480837024302242,
+        "ci95": [
+          -0.025743987539477518,
+          -0.0033957323146840026
+        ],
+        "p": 0.010994502748625687,
+        "wins": 53,
+        "losses": 113,
+        "ties": 334
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=30",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.2, dense: 0.8}"
+      ]
+    },
+    {
+      "name": "RRF k=60 bm25=0.2",
+      "metrics": {
+        "R@5": 0.40760477475740636,
+        "R@10": 0.513227546430178,
+        "R@20": 0.6220639322665639,
+        "R@100": 0.804194312704839,
+        "MRR@10": 0.40268650793650795,
+        "nDCG@10": 0.38893809079886016
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 5,
+        "lost_rate": 0.01,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.021370624161666407,
+        "ci95": [
+          -0.03457382088960574,
+          -0.0069534425834245125
+        ],
+        "p": 0.0024987506246876563,
+        "wins": 59,
+        "losses": 130,
+        "ties": 311
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=60",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.2, dense: 0.8}"
+      ]
+    },
+    {
+      "name": "RRF k=30 bm25=0.3",
+      "metrics": {
+        "R@5": 0.41927144142407297,
+        "R@10": 0.5109537369063685,
+        "R@20": 0.6211639322665639,
+        "R@100": 0.7924700019278966,
+        "MRR@10": 0.39787619047619044,
+        "nDCG@10": 0.38576003061260555
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 6,
+        "lost_rate": 0.012,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.02454868434792104,
+        "ci95": [
+          -0.03776907086991775,
+          -0.010983155278345792
+        ],
+        "p": 0.0009995002498750624,
+        "wins": 54,
+        "losses": 134,
+        "ties": 312
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=30",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.3, dense: 0.7}"
+      ]
+    },
+    {
+      "name": "RRF k=60 bm25=0.3",
+      "metrics": {
+        "R@5": 0.38510477475740634,
+        "R@10": 0.5034259591285907,
+        "R@20": 0.6104972655998973,
+        "R@100": 0.7995752650857915,
+        "MRR@10": 0.37863412698412696,
+        "nDCG@10": 0.37131449668490385
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 5,
+        "lost_rate": 0.01,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.0389942182756227,
+        "ci95": [
+          -0.05541444705750424,
+          -0.021692822112086608
+        ],
+        "p": 0.0004997501249375312,
+        "wins": 63,
+        "losses": 153,
+        "ties": 284
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=60",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.3, dense: 0.7}"
+      ]
+    },
+    {
+      "name": "加权 bm25=0.5",
+      "metrics": {
+        "R@5": 0.35318334618597774,
+        "R@10": 0.4531975098001414,
+        "R@20": 0.5626417100443416,
+        "R@100": 0.7595459835486151,
+        "MRR@10": 0.36429603174603176,
+        "nDCG@10": 0.34618017056581735
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 20,
+        "lost_rate": 0.04,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.06412854439470923,
+        "ci95": [
+          -0.07962238777937802,
+          -0.047967422455696386
+        ],
+        "p": 0.0004997501249375312,
+        "wins": 46,
+        "losses": 189,
+        "ties": 265
+      },
+      "set": [
+        "retrieval.fusion=weighted",
+        "retrieval.weights={bm25: 0.5, dense: 0.5}"
+      ]
+    },
+    {
+      "name": "RRF k=10 bm25=0.5",
+      "metrics": {
+        "R@5": 0.3514857271383587,
+        "R@10": 0.464045800398432,
+        "R@20": 0.5443583767110083,
+        "R@100": 0.7506163260715892,
+        "MRR@10": 0.3559285714285714,
+        "nDCG@10": 0.34368797322970257
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 27,
+        "lost_rate": 0.054,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.06662074173082404,
+        "ci95": [
+          -0.08189215404153852,
+          -0.0507044612778839
+        ],
+        "p": 0.0004997501249375312,
+        "wins": 43,
+        "losses": 193,
+        "ties": 264
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=10",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.5, dense: 0.5}"
+      ]
+    },
+    {
+      "name": "RRF k=30 bm25=0.5",
+      "metrics": {
+        "R@5": 0.3313500128526444,
+        "R@10": 0.44199512884776043,
+        "R@20": 0.547575043377675,
+        "R@100": 0.7506163260715892,
+        "MRR@10": 0.331652380952381,
+        "nDCG@10": 0.3208182301481491
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 27,
+        "lost_rate": 0.054,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.0894904848123775,
+        "ci95": [
+          -0.10938364300775813,
+          -0.06979336299721148
+        ],
+        "p": 0.0004997501249375312,
+        "wins": 51,
+        "losses": 203,
+        "ties": 246
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=30",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.5, dense: 0.5}"
+      ]
+    },
+    {
+      "name": "RRF k=60 bm25=0.5",
+      "metrics": {
+        "R@5": 0.32761985412248573,
+        "R@10": 0.421550684403316,
+        "R@20": 0.5319917100443416,
+        "R@100": 0.7506163260715892,
+        "MRR@10": 0.32099761904761903,
+        "nDCG@10": 0.30844384199812636
+      },
+      "fusion_loss": {
+        "window": 50,
+        "lost": 28,
+        "lost_rate": 0.056,
+        "rescued": 0,
+        "n": 500
+      },
+      "vs_dense": {
+        "n": 500,
+        "delta": -0.10186487296240021,
+        "ci95": [
+          -0.1239967699742028,
+          -0.08020323156523265
+        ],
+        "p": 0.0004997501249375312,
+        "wins": 58,
+        "losses": 203,
+        "ties": 239
+      },
+      "set": [
+        "retrieval.fusion=rrf",
+        "retrieval.rrf_k=60",
+        "retrieval.rrf_use_weights=true",
+        "retrieval.weights={bm25: 0.5, dense: 0.5}"
+      ]
+    }
+  ],
+  "config": {
+    "data_dir": "D:\\PersonalProject\\rag-zh-starter\\data\\cmedqa",
+    "index_dir": "D:\\PersonalProject\\rag-zh-starter\\indexes\\cmedqa",
+    "bm25": {
+      "jieba_mode": "search",
+      "user_dict": null,
+      "stopwords": null,
+      "k1": 1.2,
+      "b": 0.75
+    },
+    "embedder": {
+      "model": "BAAI/bge-base-zh-v1.5",
+      "query_instruction": "为这个句子生成表示以用于检索相关文章：",
+      "query_prompt_name": null,
+      "max_seq_length": 512,
+      "batch_size": 128,
+      "fp16": true,
+      "device": null
+    },
+    "faiss": {
+      "index_type": "flat",
+      "hnsw_m": 32,
+      "hnsw_ef_construction": 200,
+      "hnsw_ef_search": 128,
+      "ivf_nlist": 1024,
+      "ivf_nprobe": 32,
+      "pq_m": 64,
+      "pq_nbits": 8
+    },
+    "retrieval": {
+      "bm25_top_k": 100,
+      "dense_top_k": 100,
+      "fusion": "rrf",
+      "rrf_k": 60,
+      "rrf_use_weights": false,
+      "weights": {
+        "bm25": 0.3,
+        "dense": 0.7
+      },
+      "fused_top_k": 100
+    },
+    "reranker": {
+      "enabled": true,
+      "model": "BAAI/bge-reranker-v2-m3",
+      "top_n": 50,
+      "max_length": 512,
+      "batch_size": 64,
+      "fp16": true,
+      "device": null
+    },
+    "generation": {
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-flash",
+      "api_key_env": "LLM_API_KEY",
+      "context_top_k": 5,
+      "max_chars_per_doc": 600,
+      "temperature": 0.2
+    },
+    "eval": {
+      "split": "dev",
+      "max_queries": null,
+      "recall_ks": [
+        5,
+        10,
+        20,
+        100
+      ],
+      "seed": 42,
+      "n_queries": 500
+    }
+  }
+}

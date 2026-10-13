@@ -24,7 +24,9 @@ flowchart LR
 | Hybrid + Rerank (bge-reranker-v2-m3, top 50) | | | | | | | |
 | + 微调后的 bge-base | | | | | | | |
 
-`results/` 里每次评测都有一份 `.md`（表格 + 完整配置）、`.json` 和 `_failures.jsonl`（失败案例），可以直接复现。
+`results/` 里每次评测都有一份 `.md`（表格 + 显著性检验 + 融合丢失 + 失败分类 + 完整配置）、`.json`、`_failures.jsonl`（全部失败案例，全文）和 `_runs.tsv.gz`（每条查询每个模式的前 100 名，事后分析不用重跑模型），可以直接复现。
+
+失败案例按"问题出在哪一环"分成五类：召回失败（两路都没找到）、融合丢失（某一路排进了重排窗口，融合后掉出去）、截断失败（排在重排窗口 top_n 之外）、重排挤出（重排前在前 10，重排后被挤出）、排序失败（其余）。
 
 ## 快速开始
 
@@ -70,10 +72,30 @@ python scripts/bench_faiss.py                                               # fl
 ```bash
 python scripts/evaluate.py --split dev --set reranker.top_n=20 --tag topn20
 python scripts/evaluate.py --split dev --set retrieval.fusion=weighted --set "retrieval.weights={bm25: 0.2, dense: 0.8}"
+python scripts/tune_fusion.py --split dev        # BM25/向量各跑一次，枚举融合方式、RRF k、两路权重，给出最优的 --set 参数
 # 改了影响索引的参数（嵌入模型、max_seq_length、jieba 模式、词典、k1/b、Faiss 建索引参数），先用同样的 --set 跑 build_index.py
 python scripts/build_index.py --only dense --set embedder.model=BAAI/bge-large-zh-v1.5
 python scripts/evaluate.py --modes dense,dense_rerank --set embedder.model=BAAI/bge-large-zh-v1.5
 ```
+
+两次评测之间的差距是不是真的（比如 bge-base vs bge-large），用各自保存的 run 文件做配对显著性检验：
+
+```bash
+python scripts/compare_runs.py --a results/<base 那次>_runs.tsv.gz:dense --b results/<large 那次>_runs.tsv.gz:dense
+```
+
+### 补标评测：修正标注不完整
+
+CMedQA 的"正确答案"只是原帖下医生的回复，别处同样能回答的回答一律算错，重排会因此被低估。用大模型给各方法前 10 名里没被标注的结果打分（0/1/2），再按"原标注 ∪ 大模型判相关"重算指标，并抽样人工盲评算一致率：
+
+```bash
+python scripts/relabel.py judge --runs results/<某次评测>_runs.tsv.gz --dry-run          # 先看要打多少分
+python scripts/relabel.py judge --runs results/<某次评测>_runs.tsv.gz --max-queries 50    # 小规模试跑
+python scripts/relabel.py judge --runs results/<某次评测>_runs.tsv.gz                     # 全量（打过的自动跳过）
+python scripts/relabel.py agree --csv results/relabel/<名字>_human.csv                   # 填完人工评分后算一致率
+```
+
+补标只用于评估，不用于调参；报告里原始指标、补标指标和人工一致率都要给出。
 
 ### 5. 生成回答
 
@@ -115,10 +137,13 @@ rag/
   reranker.py       交叉编码器重排
   pipeline.py       在线问答流程
   generator.py      带引用的提示词 + OpenAI 兼容接口
-  metrics.py        Recall / MRR / nDCG（与 pytrec_eval 口径一致）
-  evaluation.py     消融评测、失败分析、延迟
+  metrics.py        Recall / MRR / nDCG（与 pytrec_eval 口径一致），逐条查询的指标
+  evaluation.py     消融评测、失败分类、融合丢失、融合调参、显著性、延迟
+  stats.py          配对随机化检验 + bootstrap 置信区间
+  runs.py           逐条排序结果（_runs.tsv.gz）的读写
+  judge.py          大模型补标：候选池、打分与缓存、合并标注、一致率
   advanced/         进阶部分（待实现）
-scripts/            prepare_data / build_index / evaluate / bench_faiss / ask / finetune_embedder
+scripts/            prepare_data / build_index / evaluate / tune_fusion / compare_runs / relabel / bench_faiss / ask / finetune_embedder
 tests/              单测（用假模型，不需要 GPU）
 ```
 

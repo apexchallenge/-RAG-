@@ -1,0 +1,105 @@
+{
+  "split": "test",
+  "n_queries": 1000,
+  "n_docs": 100001,
+  "table": {
+    "dense": {
+      "R@5": 0.4468459786945081,
+      "R@10": 0.5268302627111451,
+      "R@20": 0.618928781512605,
+      "R@100": 0.8281990429505136,
+      "MRR@10": 0.4459059523809524,
+      "nDCG@10": 0.42773385480272724,
+      "ms/q": 2.9014136999612674
+    },
+    "dense_rerank": {
+      "R@5": 0.41801313555725317,
+      "R@10": 0.5036074335794924,
+      "R@20": 0.6165925770308123,
+      "R@100": 0.8281990429505136,
+      "MRR@10": 0.42248849206349204,
+      "nDCG@10": 0.40101163048904076,
+      "ms/q": 185.5203073999728
+    }
+  },
+  "failures": {
+    "mode": "dense_rerank",
+    "k": 10,
+    "failed": 383,
+    "total": 1000,
+    "召回失败": 119,
+    "排序失败": 198,
+    "截断失败": 66
+  },
+  "latency_ms": null,
+  "config": {
+    "data_dir": "D:\\PersonalProject\\rag-zh-starter\\data\\cmedqa",
+    "index_dir": "D:\\PersonalProject\\rag-zh-starter\\indexes\\cmedqa",
+    "bm25": {
+      "jieba_mode": "search",
+      "user_dict": null,
+      "stopwords": null,
+      "k1": 1.2,
+      "b": 0.75
+    },
+    "embedder": {
+      "model": "BAAI/bge-large-zh-v1.5",
+      "query_instruction": "为这个句子生成表示以用于检索相关文章：",
+      "query_prompt_name": null,
+      "max_seq_length": 512,
+      "batch_size": 128,
+      "fp16": true,
+      "device": null
+    },
+    "faiss": {
+      "index_type": "flat",
+      "hnsw_m": 32,
+      "hnsw_ef_construction": 200,
+      "hnsw_ef_search": 128,
+      "ivf_nlist": 1024,
+      "ivf_nprobe": 32,
+      "pq_m": 64,
+      "pq_nbits": 8
+    },
+    "retrieval": {
+      "bm25_top_k": 100,
+      "dense_top_k": 100,
+      "fusion": "rrf",
+      "rrf_k": 60,
+      "rrf_use_weights": false,
+      "weights": {
+        "bm25": 0.3,
+        "dense": 0.7
+      },
+      "fused_top_k": 100
+    },
+    "reranker": {
+      "enabled": true,
+      "model": "BAAI/bge-reranker-v2-m3",
+      "top_n": 50,
+      "max_length": 512,
+      "batch_size": 64,
+      "fp16": true,
+      "device": null
+    },
+    "generation": {
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-flash",
+      "api_key_env": "LLM_API_KEY",
+      "context_top_k": 5,
+      "max_chars_per_doc": 600,
+      "temperature": 0.2
+    },
+    "eval": {
+      "split": "test",
+      "max_queries": null,
+      "recall_ks": [
+        5,
+        10,
+        20,
+        100
+      ],
+      "seed": 42
+    }
+  }
+}
