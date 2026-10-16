@@ -1,0 +1,12 @@
+﻿start 10/15/2026 16:35:08
+SAPI voices:
+  Microsoft Huihui Desktop | zh-CN | Female
+  Microsoft Zira Desktop | en-US | Female
+wrote D:\PersonalProject\rag-zh-starter\kg_intro_video\voice\s1.wav
+wrote D:\PersonalProject\rag-zh-starter\kg_intro_video\voice\s2.wav
+wrote D:\PersonalProject\rag-zh-starter\kg_intro_video\voice\s3.wav
+wrote D:\PersonalProject\rag-zh-starter\kg_intro_video\voice\s4.wav
+wrote D:\PersonalProject\rag-zh-starter\kg_intro_video\voice\s5.wav
+wrote D:\PersonalProject\rag-zh-starter\kg_intro_video\voice\s6.wav
+wrote D:\PersonalProject\rag-zh-starter\kg_intro_video\voice\s7.wav
+DONE SAPI Microsoft Huihui Desktop

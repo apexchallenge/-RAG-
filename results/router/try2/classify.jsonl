@@ -1,0 +1,3 @@
+{"set": "answerable", "qid": "5b5d0e3aea81524986db0745f861c5ca", "question": "痔疮手术做多了有什么影响痔疮手术做多了有什么影响", "route": "simple", "raw": "simple", "seconds": 14.215751499999897, "usage": {"calls": 1, "prompt_tokens": 217, "completion_tokens": 1031}}
+{"set": "answerable", "qid": "1c14b319de96fe55a012e40c022c46fd", "question": "36天宝宝还有黄胆前额数值怎么比出生7天查的还长呢", "route": "complex", "raw": "complex", "seconds": 32.11383439999918, "usage": {"calls": 1, "prompt_tokens": 223, "completion_tokens": 1283}}
+{"set": "answerable", "qid": "c9e90436bcb0978c6ea120f84c69f7fc", "question": "我女儿感冒了咳嗽得利害，昨天晚上8点钟打的点滴，今天最好什么时候去打点滴？", "route": "complex", "raw": "complex", "seconds": 80.83207489999768, "usage": {"calls": 1, "prompt_tokens": 227, "completion_tokens": 3150}}

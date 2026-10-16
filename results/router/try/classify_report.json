@@ -1,0 +1,11 @@
+{
+  "tag": "try",
+  "split": "dev",
+  "small": "qwen3:4b @ http://localhost:11434/v1",
+  "summary": {
+    "by_set": {},
+    "overall": {
+      "n_errors": 0
+    }
+  }
+}

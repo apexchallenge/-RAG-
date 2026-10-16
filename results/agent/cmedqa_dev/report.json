@@ -1,0 +1,214 @@
+{
+  "tag": "cmedqa_dev",
+  "split": "dev",
+  "time": "2026-10-13 11:20:48",
+  "counts": {
+    "answerable": 20,
+    "ood": 10,
+    "masked": 10
+  },
+  "summary": {
+    "by_set": {
+      "answerable": {
+        "baseline": {
+          "n": 20,
+          "refusal_rate": 0.2,
+          "helpful_mean": 1.55,
+          "helpful2_rate": 0.75,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.0,
+          "llm_calls_mean": 1.0,
+          "tokens_mean": 2112.85,
+          "seconds_p50": 10.459428100000878,
+          "seconds_mean": 12.05114725500007
+        },
+        "agent": {
+          "n": 20,
+          "refusal_rate": 0.6,
+          "helpful_mean": 0.8,
+          "helpful2_rate": 0.4,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 2.25,
+          "llm_calls_mean": 3.9,
+          "tokens_mean": 2261.45,
+          "seconds_p50": 11.324918000000253,
+          "seconds_mean": 11.431689614999687
+        }
+      },
+      "ood": {
+        "baseline": {
+          "n": 10,
+          "refusal_rate": 1.0,
+          "helpful_mean": 0.0,
+          "helpful2_rate": 0.0,
+          "grounded_rate_answered": null,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.0,
+          "llm_calls_mean": 1.0,
+          "tokens_mean": 984.8,
+          "seconds_p50": 3.629468799999813,
+          "seconds_mean": 4.094081380000352
+        },
+        "agent": {
+          "n": 10,
+          "refusal_rate": 1.0,
+          "helpful_mean": 0.0,
+          "helpful2_rate": 0.0,
+          "grounded_rate_answered": null,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 3.0,
+          "llm_calls_mean": 5.0,
+          "tokens_mean": 2136.9,
+          "seconds_p50": 9.330565000000206,
+          "seconds_mean": 9.491321179999796
+        }
+      },
+      "masked": {
+        "baseline": {
+          "n": 10,
+          "refusal_rate": 0.4,
+          "helpful_mean": 1.2,
+          "helpful2_rate": 0.6,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.0,
+          "llm_calls_mean": 1.0,
+          "tokens_mean": 2064.2,
+          "seconds_p50": 11.97999659999914,
+          "seconds_mean": 11.906442700000117
+        },
+        "agent": {
+          "n": 10,
+          "refusal_rate": 0.8,
+          "helpful_mean": 0.4,
+          "helpful2_rate": 0.2,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 2.7,
+          "llm_calls_mean": 4.6,
+          "tokens_mean": 2105.0,
+          "seconds_p50": 10.421684899998581,
+          "seconds_mean": 10.849242260000029
+        }
+      }
+    },
+    "tests": {
+      "answerable": {
+        "helpful": {
+          "n": 20,
+          "delta": -0.75,
+          "ci95": [
+            -1.15,
+            -0.35
+          ],
+          "p": 0.007398520295940812,
+          "wins": 0,
+          "losses": 8,
+          "ties": 12
+        },
+        "refused": {
+          "n": 20,
+          "delta": 0.4,
+          "ci95": [
+            0.2,
+            0.6
+          ],
+          "p": 0.007398520295940812,
+          "wins": 8,
+          "losses": 0,
+          "ties": 12
+        },
+        "ungrounded": {
+          "n": 20,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 20
+        }
+      },
+      "ood": {
+        "helpful": {
+          "n": 10,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 10
+        },
+        "refused": {
+          "n": 10,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 10
+        },
+        "ungrounded": {
+          "n": 10,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 10
+        }
+      },
+      "masked": {
+        "helpful": {
+          "n": 10,
+          "delta": -0.8,
+          "ci95": [
+            -1.6,
+            0.0
+          ],
+          "p": 0.22035592881423716,
+          "wins": 1,
+          "losses": 5,
+          "ties": 4
+        },
+        "refused": {
+          "n": 10,
+          "delta": 0.4,
+          "ci95": [
+            0.0,
+            0.8
+          ],
+          "p": 0.22035592881423716,
+          "wins": 5,
+          "losses": 1,
+          "ties": 4
+        },
+        "ungrounded": {
+          "n": 10,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 10
+        }
+      }
+    }
+  }
+}

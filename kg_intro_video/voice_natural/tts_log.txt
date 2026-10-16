@@ -1,0 +1,19 @@
+xiaoxiao/s0.mp3  语速+16%  时长约10.0s / 可用10.45s
+xiaoxiao/s1.mp3  语速+7%  时长约13.8s / 可用14.45s
+xiaoxiao/s2.mp3  语速+9%  时长约18.7s / 可用19.45s
+xiaoxiao/s3.mp3  语速+10%  时长约18.6s / 可用19.45s
+xiaoxiao/s4.mp3  语速+2%  时长约18.7s / 可用19.45s
+xiaoxiao/s5.mp3  语速+16%  时长约18.6s / 可用19.45s
+xiaoxiao/s6.mp3  语速+12%  时长约13.8s / 可用14.45s
+xiaoxiao/s7.mp3  语速+4%  时长约9.0s / 可用9.45s
+xiaoxiao/s8.mp3  语速+17%  时长约12.0s / 可用12.45s
+yunxi/s0.mp3  语速+11%  时长约10.0s / 可用10.45s
+yunxi/s1.mp3  语速+8%  时长约13.9s / 可用14.45s
+yunxi/s2.mp3  语速+4%  时长约18.6s / 可用19.45s
+yunxi/s3.mp3  语速+8%  时长约18.6s / 可用19.45s
+yunxi/s4.mp3  语速+0%  时长约18.0s / 可用19.45s
+yunxi/s5.mp3  语速+13%  时长约18.6s / 可用19.45s
+yunxi/s6.mp3  语速+12%  时长约13.8s / 可用14.45s
+yunxi/s7.mp3  语速+0%  时长约8.7s / 可用9.45s
+yunxi/s8.mp3  语速+14%  时长约11.9s / 可用12.45s
+DONE

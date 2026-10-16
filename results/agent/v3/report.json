@@ -1,0 +1,369 @@
+{
+  "tag": "v3",
+  "split": "dev",
+  "time": "2026-10-13 15:21:26",
+  "counts": {
+    "answerable": 200,
+    "ood": 50,
+    "hard_ood": 30,
+    "masked": 100
+  },
+  "summary": {
+    "by_set": {
+      "answerable": {
+        "baseline": {
+          "n": 200,
+          "refusal_rate": 0.04,
+          "helpful_mean": 1.715,
+          "helpful2_rate": 0.755,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.0,
+          "llm_calls_mean": 1.0,
+          "tokens_mean": 2296.45,
+          "seconds_p50": 11.846584099999745,
+          "seconds_mean": 12.374073589000027
+        },
+        "agent": {
+          "n": 200,
+          "refusal_rate": 0.05,
+          "helpful_mean": 1.735,
+          "helpful2_rate": 0.785,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 2.105,
+          "llm_calls_mean": 4.205,
+          "tokens_mean": 4117.97,
+          "seconds_p50": 19.96224969999821,
+          "seconds_mean": 20.21741655699998,
+          "triggered_rate": 0.595,
+          "n_triggered": 119,
+          "context_changed_rate": 1.0,
+          "improved_rate": 0.13445378151260504,
+          "triggered_helpful_delta": 0.01680672268907563,
+          "first_status": {
+            "partial_nr": 24,
+            "sufficient": 57,
+            "partial": 118,
+            "irrelevant": 1
+          },
+          "final_status": {
+            "partial_nr": 31,
+            "sufficient": 73,
+            "partial": 95,
+            "irrelevant": 1
+          },
+          "stop_reason": {
+            "not_retrievable": 31,
+            "sufficient": 73,
+            "max_rounds": 95,
+            "irrelevant": 1
+          }
+        }
+      },
+      "ood": {
+        "baseline": {
+          "n": 50,
+          "refusal_rate": 0.82,
+          "helpful_mean": 0.28,
+          "helpful2_rate": 0.1,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.0,
+          "llm_calls_mean": 1.0,
+          "tokens_mean": 1397.18,
+          "seconds_p50": 4.574007899998833,
+          "seconds_mean": 5.56584692000004
+        },
+        "agent": {
+          "n": 50,
+          "refusal_rate": 0.86,
+          "helpful_mean": 0.2,
+          "helpful2_rate": 0.06,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.2,
+          "llm_calls_mean": 2.32,
+          "tokens_mean": 2458.98,
+          "seconds_p50": 7.142567700000654,
+          "seconds_mean": 8.131166838000208,
+          "triggered_rate": 0.18,
+          "n_triggered": 9,
+          "context_changed_rate": 1.0,
+          "improved_rate": 0.1111111111111111,
+          "triggered_helpful_delta": -0.1111111111111111,
+          "first_status": {
+            "partial_nr": 40,
+            "partial": 4,
+            "irrelevant": 5,
+            "sufficient": 1
+          },
+          "final_status": {
+            "partial_nr": 44,
+            "partial": 1,
+            "irrelevant": 4,
+            "sufficient": 1
+          },
+          "stop_reason": {
+            "not_retrievable": 44,
+            "max_rounds": 1,
+            "irrelevant": 4,
+            "sufficient": 1
+          }
+        }
+      },
+      "hard_ood": {
+        "baseline": {
+          "n": 30,
+          "refusal_rate": 0.6,
+          "helpful_mean": 0.5333333333333333,
+          "helpful2_rate": 0.13333333333333333,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.0,
+          "llm_calls_mean": 1.0,
+          "tokens_mean": 1297.1666666666667,
+          "seconds_p50": 5.505912399999943,
+          "seconds_mean": 6.430138773333541
+        },
+        "agent": {
+          "n": 30,
+          "refusal_rate": 0.6333333333333333,
+          "helpful_mean": 0.5666666666666667,
+          "helpful2_rate": 0.2,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 2.2666666666666666,
+          "llm_calls_mean": 4.433333333333334,
+          "tokens_mean": 3055.3,
+          "seconds_p50": 17.67938150000191,
+          "seconds_mean": 16.15414485333349,
+          "triggered_rate": 0.7,
+          "n_triggered": 21,
+          "context_changed_rate": 1.0,
+          "improved_rate": 0.0,
+          "triggered_helpful_delta": 0.047619047619047616,
+          "first_status": {
+            "partial": 19,
+            "partial_nr": 9,
+            "irrelevant": 2
+          },
+          "final_status": {
+            "partial": 15,
+            "partial_nr": 12,
+            "irrelevant": 3
+          },
+          "stop_reason": {
+            "max_rounds": 16,
+            "not_retrievable": 12,
+            "irrelevant": 2
+          }
+        }
+      },
+      "masked": {
+        "baseline": {
+          "n": 100,
+          "refusal_rate": 0.22,
+          "helpful_mean": 1.26,
+          "helpful2_rate": 0.48,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 1.0,
+          "llm_calls_mean": 1.0,
+          "tokens_mean": 2180.15,
+          "seconds_p50": 10.877575399998022,
+          "seconds_mean": 11.818425504999942
+        },
+        "agent": {
+          "n": 100,
+          "refusal_rate": 0.12,
+          "helpful_mean": 1.38,
+          "helpful2_rate": 0.5,
+          "grounded_rate_answered": 1.0,
+          "ungrounded_answer_rate": 0.0,
+          "rounds_mean": 2.44,
+          "llm_calls_mean": 4.87,
+          "tokens_mean": 4354.24,
+          "seconds_p50": 21.708692600001086,
+          "seconds_mean": 21.698613972999993,
+          "triggered_rate": 0.76,
+          "n_triggered": 76,
+          "context_changed_rate": 1.0,
+          "improved_rate": 0.13157894736842105,
+          "triggered_helpful_delta": 0.17105263157894737,
+          "first_status": {
+            "partial": 75,
+            "partial_nr": 16,
+            "sufficient": 8,
+            "irrelevant": 1
+          },
+          "final_status": {
+            "partial": 63,
+            "sufficient": 17,
+            "partial_nr": 19,
+            "irrelevant": 1
+          },
+          "stop_reason": {
+            "max_rounds": 64,
+            "sufficient": 17,
+            "not_retrievable": 19
+          }
+        }
+      }
+    },
+    "tests": {
+      "answerable": {
+        "helpful": {
+          "n": 200,
+          "delta": 0.02,
+          "ci95": [
+            -0.045,
+            0.085
+          ],
+          "p": 0.6464707058588283,
+          "wins": 20,
+          "losses": 16,
+          "ties": 164
+        },
+        "refused": {
+          "n": 200,
+          "delta": 0.01,
+          "ci95": [
+            -0.015,
+            0.035
+          ],
+          "p": 0.6998600279944012,
+          "wins": 4,
+          "losses": 2,
+          "ties": 194
+        },
+        "ungrounded": {
+          "n": 200,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 200
+        }
+      },
+      "ood": {
+        "helpful": {
+          "n": 50,
+          "delta": -0.08,
+          "ci95": [
+            -0.2,
+            0.02
+          ],
+          "p": 0.2981403719256149,
+          "wins": 1,
+          "losses": 4,
+          "ties": 45
+        },
+        "refused": {
+          "n": 50,
+          "delta": 0.04,
+          "ci95": [
+            -0.04,
+            0.12
+          ],
+          "p": 0.609878024395121,
+          "wins": 3,
+          "losses": 1,
+          "ties": 46
+        },
+        "ungrounded": {
+          "n": 50,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 50
+        }
+      },
+      "hard_ood": {
+        "helpful": {
+          "n": 30,
+          "delta": 0.03333333333333333,
+          "ci95": [
+            -0.13333333333333333,
+            0.2
+          ],
+          "p": 1.0,
+          "wins": 4,
+          "losses": 3,
+          "ties": 23
+        },
+        "refused": {
+          "n": 30,
+          "delta": 0.03333333333333333,
+          "ci95": [
+            -0.06666666666666667,
+            0.13333333333333333
+          ],
+          "p": 1.0,
+          "wins": 2,
+          "losses": 1,
+          "ties": 27
+        },
+        "ungrounded": {
+          "n": 30,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 30
+        }
+      },
+      "masked": {
+        "helpful": {
+          "n": 100,
+          "delta": 0.12,
+          "ci95": [
+            -0.01,
+            0.25
+          ],
+          "p": 0.10357928414317137,
+          "wins": 24,
+          "losses": 13,
+          "ties": 63
+        },
+        "refused": {
+          "n": 100,
+          "delta": -0.1,
+          "ci95": [
+            -0.18,
+            -0.02
+          ],
+          "p": 0.033993201359728054,
+          "wins": 4,
+          "losses": 14,
+          "ties": 82
+        },
+        "ungrounded": {
+          "n": 100,
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "p": 1.0,
+          "wins": 0,
+          "losses": 0,
+          "ties": 100
+        }
+      }
+    }
+  }
+}

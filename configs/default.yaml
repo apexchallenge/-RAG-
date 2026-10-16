@@ -56,6 +56,35 @@ generation:
   context_top_k: 5
   max_chars_per_doc: 600
   temperature: 0.2
+  thinking: null            # 写回答时是否开思考：null=服务商默认（deepseek-flash 默认开）；false 关；true 开
+
+agent:                      # answer_with_check：资料判成 充分/部分/部分（查不到）/无关；只有"部分"才补检索，只有无关才拒答
+  max_rounds: 2             # "部分"时最多额外检索几轮
+  refine: hyde              # 补检索的写法：hyde = 写一段像医生回答的口语文字；query = 写一句口语化查询
+  merge: slots              # 新文档怎么并进资料：slots = 保留名额，替换原资料里排最后的；rerank = 旧做法，新旧一起按原问题重排
+  new_slots: 2              # slots 模式下每轮给新文档的名额（原资料至少保留前 2 条）
+  max_irrelevant_retries: 1 # "无关"时先再试几轮（可能只是没检索对），仍无关才拒答
+  thinking: false           # 充分性检查、改写查询这类判断步骤是否开思考（关掉更快更便宜）
+  max_tokens: 1024          # 判断步骤的输出上限；开思考时要留够
+
+hierarchical:               # 父子分块（rag/advanced/hierarchical.py，scripts/eval_hierarchical.py）：子块建索引，命中后返回父块
+  parent_size: 1200         # 父块字数（给大模型的上下文单位，父块之间不重叠）
+  child_size: 300           # 子块字数（检索单位）
+  child_overlap: 50         # 相邻子块重叠字数
+  agg: max                  # 子块 -> 父块：max 取最高分；sum 求和（偏向命中多个子块的父块）
+  child_k: 200              # 每一路召回多少个子块（子块比文档多，召回要比 bm25_top_k / dense_top_k 深一些）
+
+router:                     # 大小模型路由（rag/advanced/router.py，scripts/eval_router.py）：小模型分类 -> 闲聊/知识库外不检索，简单题小模型写回答，复杂题大模型
+  kb_description: "网上医疗问答社区里医生对患者提问的回答（常见病的症状、病因、用药、检查、日常护理和饮食建议）"
+  small:                    # 小模型：字段同 generation，没写的沿用 generation（context_top_k、max_chars_per_doc 等）
+    base_url: http://localhost:11434/v1   # 本地 Ollama（先 ollama pull qwen3:4b）；也可以换成便宜的 API 模型
+    model: qwen3:4b
+    api_key_env: SMALL_LLM_API_KEY        # 本地服务不需要 key
+    thinking: null          # Ollama 不认 DeepSeek 的 thinking 参数，保持 null；<think> 段会在解析时去掉
+    # 关思考（开着思考分类一条要几十秒、上千 token）：先跑 python scripts/eval_router.py probe，按推荐取消下面某一行的注释
+    # prompt_suffix: " /no_think"         # Qwen3 混合思考模型的软开关
+    # extra_body: {think: false}          # Ollama 的思考开关（取决于 Ollama 版本是否支持）
+  classify_max_tokens: null # 分类的输出上限；小模型开思考时不要设太小，思考被截断就解析不出类别（按 complex 处理）
 
 eval:
   split: test               # 最终报告只看 test；调参用 --split dev

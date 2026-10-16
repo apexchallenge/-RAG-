@@ -1,0 +1,25 @@
+{
+  "tag": "try2",
+  "split": "dev",
+  "small": "qwen3:4b @ http://localhost:11434/v1",
+  "summary": {
+    "by_set": {
+      "answerable": {
+        "n": 3,
+        "routes": {
+          "simple": 1,
+          "complex": 2
+        },
+        "blocked_rate": 0.0,
+        "seconds_p50": 32.11383439999918,
+        "tokens_mean": 2043.6666666666667,
+        "expected_rate": 1.0
+      }
+    },
+    "overall": {
+      "misblock_rate": 0.0,
+      "simple_rate": 0.3333333333333333,
+      "n_errors": 0
+    }
+  }
+}

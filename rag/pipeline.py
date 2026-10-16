@@ -74,3 +74,24 @@ class RAGPipeline:
             with timer(res["timings"], "llm"):
                 res["answer"] = self.generator.answer(question, [c["text"] for c in res["contexts"]])
         return res
+
+    def warmup(self) -> None:
+        """第一次调用 GPU 有初始化开销（几十到几百毫秒），交互问答前先跑一次，耗时统计才准。"""
+        for comp in (getattr(self.embedder, "warmup", None), getattr(self.reranker, "warmup", None)):
+            if comp is not None:
+                comp()
+
+    def agent_llm(self):
+        """agent 判断步骤（充分性检查、改写查询）用的大模型；思考模式和输出上限读 agent 配置。"""
+        a = self.cfg.get("agent", {}) or {}
+        return self.generator.as_llm(thinking=a.get("thinking", False), max_tokens=int(a.get("max_tokens", 1024)))
+
+    def ask_with_check(self, question: str, exclude: set[str] | None = None) -> dict:
+        """检索 -> 判断资料（充分/部分/部分（查不到）/无关）-> 值得的话补检索 -> 回答；只有无关才拒答（见 rag/advanced/query_rewrite.py）。"""
+        from .advanced.query_rewrite import answer_with_check
+
+        a = self.cfg.get("agent", {}) or {}
+        return answer_with_check(self, self.agent_llm(), question, int(a.get("max_rounds", 2)), exclude=exclude,
+                                 refine=a.get("refine", "hyde"),
+                                 max_irrelevant_retries=int(a.get("max_irrelevant_retries", 1)),
+                                 merge=a.get("merge", "slots"), new_slots=int(a.get("new_slots", 2)))
